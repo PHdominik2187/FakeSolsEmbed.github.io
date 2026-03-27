@@ -236,7 +236,7 @@
             transition: all 0.2s ease;
         }
 
-        .glitched-toggle input:checked + .custom-checkbox {
+        .glitched-toggle input:checked+.custom-checkbox {
             background: #43b581;
             border-color: #43b581;
         }
@@ -254,7 +254,7 @@
             display: none;
         }
 
-        .glitched-toggle input:checked + .custom-checkbox::after {
+        .glitched-toggle input:checked+.custom-checkbox::after {
             display: block;
         }
 
@@ -312,7 +312,8 @@
             <input id="topUsername" placeholder="DisplayName(@Username)" oninput="updatePreview()" />
 
             <label>Description</label>
-            <textarea id="description" placeholder="**The Blinding Light** has devoured **Username** (Use &quot;**Message**&quot; for bold text)"
+            <textarea id="description"
+                placeholder="**The Blinding Light** has devoured **Username** (Use &quot;**Message**&quot; for bold text)"
                 oninput="updatePreview()"></textarea>
 
             <label>Star & Stripe Color</label>
@@ -325,8 +326,8 @@
                 <option value="#fa4d4d">PIXELATION</option>
                 <option value="#24b9be">Leviathan</option>
                 <option value="#808080">EQUINOX</option>
+                <option value="#410594">Monarch</option>
             </select>
-
             <label>Rolls</label>
             <input id="rolls" placeholder="---,---,---" oninput="updatePreview()" />
 
@@ -385,7 +386,8 @@
             "#5844ba": "https://cdn.mongoosee.com/assets/stars/Memory.png",
             "#fa4d4d": "https://cdn.mongoosee.com/assets/stars/Pixelation.png",
             "#24b9be": "https://cdn.mongoosee.com/assets/stars/LEVIATHAN.png",
-            "#808080": "https://cdn.mongoosee.com/assets/stars/Equinox.png"
+            "#808080": "https://cdn.mongoosee.com/assets/stars/Equinox.png",
+            "#410594": "https://cdn.mongoosee.com/assets/stars/Monarch.png"
         };
 
         function updateEmojiByStripe() {
@@ -474,7 +476,7 @@
                 if (timestamp) fieldsDiv.innerHTML += `<div class="field"><strong>Time Discovered</strong><br>&lt;t:${timestamp}:R&gt;</div>`;
             } else {
                 if (rolls) fieldsDiv.innerHTML += `<div class="field"><strong>Rolls</strong><br>${rolls}</div>`;
-                if (rarityRaw) fieldsDiv.innerHTML += `<div class="field"><strong>Rarity</strong><br>${formatNumber(rarityRaw)}</div>`;
+                if (rarityRaw) fieldsDiv.innerHTML += `<div class="field"><strong>Rarity</strong><br>1 in ${formatNumber(rarityRaw)}</div>`;
                 if (luck) fieldsDiv.innerHTML += `<div class="field"><strong>Luck</strong><br>${luck}</div>`;
                 if (timestamp) fieldsDiv.innerHTML += `<div class="field"><strong>Time Discovered</strong><br>&lt;t:${timestamp}:R&gt;</div>`;
             }
@@ -514,7 +516,7 @@
                 if (timestamp) embed.fields.push({ name: "Time Discovered", value: `<t:${timestamp}:R>`, inline: true });
             } else {
                 if (rolls) embed.fields.push({ name: "Rolls", value: rolls, inline: true });
-                if (rarityRaw) embed.fields.push({ name: "Rarity", value: formatNumber(rarityRaw), inline: true });
+                if (rarityRaw) embed.fields.push({ name: "Rarity", value: `1 in ${formatNumber(rarityRaw)}`, inline: true });
                 if (luck) embed.fields.push({ name: "Luck", value: luck, inline: true });
                 if (timestamp) embed.fields.push({ name: "Time Discovered", value: `<t:${timestamp}:R>`, inline: true });
             }
