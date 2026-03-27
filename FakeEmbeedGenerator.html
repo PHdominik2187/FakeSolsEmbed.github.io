@@ -7,78 +7,129 @@
     <title>Sol's Embed Generator</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1e1e2f;
-            color: #f5f5f5;
-            padding: 20px;
+            font-family: 'Whitney', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #36393f;
+            color: #dcddde;
+            padding: 24px;
+            margin: 0;
+            font-size: 16px;
         }
 
         h1 {
             text-align: center;
-            color: #fff;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 2rem;
         }
 
         .container {
             display: flex;
-            gap: 20px;
+            gap: 18px;
             flex-wrap: wrap;
-            max-width: 1000px;
+            max-width: 1120px;
             margin: 0 auto;
         }
 
         .card,
         .preview {
-            flex: 1 1 480px;
-            background: #28283e;
+            flex: 1 1 520px;
+            background: #2f3136;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 14px;
+            border: 1px solid #202225;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
         }
 
         label {
             display: block;
-            margin-top: 15px;
-            font-weight: bold;
-            color: #ddd;
+            margin-top: 14px;
+            font-weight: 600;
+            color: #b9bbbe;
+            font-size: 0.90rem;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
         }
 
         input,
         textarea,
         select {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 6px;
-            border: 2px solid #555;
-            font-size: 16px;
+            padding: 14px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 1px solid #202225;
+            font-size: 17px;
+            background: #202225;
+            color: #dcddde;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        textarea {
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 1px solid #7289da;
+            box-shadow: 0 0 0 1px rgba(114, 137, 218, 0.4);
         }
 
         button {
             margin-top: 20px;
-            padding: 12px;
+            padding: 10px 14px;
             border: none;
             border-radius: 6px;
-            background: #4cafef;
+            background: #5865f2;
             color: #fff;
             cursor: pointer;
+            font-weight: 600;
         }
 
         button:hover {
-            background: #3aa0f3;
+            background: #4752c4;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .copy-btn {
+            background: #43b581;
+        }
+
+        .copy-btn:hover {
+            background: #399569;
         }
 
         pre {
-            background: #2a2a3f;
-            padding: 15px;
+            background: #202225;
+            padding: 14px;
             border-radius: 8px;
             margin-top: 20px;
             white-space: pre-wrap;
             word-break: break-word;
+            border: 1px solid #18191d;
+            color: #dcddde;
         }
 
         .embed {
-            background: #36393f;
+            background: #2f3136;
             padding: 12px;
             border-radius: 8px;
+            border: 1px solid #202225;
         }
 
         .author {
@@ -124,8 +175,10 @@
 
         .footer {
             margin-top: 10px;
-            font-size: 12px;
-            color: #aaa;
+            font-size: 13px;
+            color: #b9bbbe;
+            text-align: left;
+            padding-left: 4px;
         }
 
         code {
@@ -155,9 +208,96 @@
             gap: 10px;
         }
 
-        .rarity-container input[type="checkbox"] {
-            width: auto;
-            margin-top: 0;
+        .glitched-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            color: #dcddde;
+            font-size: 0.9rem;
+        }
+
+        .glitched-toggle input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .custom-checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #72767d;
+            background: #202225;
+            display: inline-block;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .glitched-toggle input:checked + .custom-checkbox {
+            background: #43b581;
+            border-color: #43b581;
+        }
+
+        .custom-checkbox::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            display: none;
+        }
+
+        .glitched-toggle input:checked + .custom-checkbox::after {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 14px;
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                flex-direction: column;
+                max-width: 100%;
+                gap: 14px;
+            }
+
+            .card,
+            .preview {
+                flex: 1 1 100%;
+                padding: 18px;
+            }
+
+            input,
+            textarea,
+            select {
+                padding: 13px;
+                font-size: 16px;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .fields {
+                flex-direction: column;
+            }
+
+            .description-container {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -172,7 +312,7 @@
             <input id="topUsername" placeholder="DisplayName(@Username)" oninput="updatePreview()" />
 
             <label>Description</label>
-            <textarea id="description" placeholder="The Blinding Light has devoured *Username*"
+            <textarea id="description" placeholder="**The Blinding Light** has devoured **Username** (Use &quot;**Message**&quot; for bold text)"
                 oninput="updatePreview()"></textarea>
 
             <label>Star & Stripe Color</label>
@@ -193,7 +333,11 @@
             <label>Rarity</label>
             <div class="rarity-container">
                 <input id="rarity" placeholder="---,---,---" oninput="updatePreview()" />
-                <input type="checkbox" id="fromGlitched" onchange="updatePreview()" /> [From Glitched!]
+                <label class="glitched-toggle">
+                    <input type="checkbox" id="fromGlitched" onchange="updatePreview()" />
+                    <span class="custom-checkbox"></span>
+                    <span>From Glitched!</span>
+                </label>
             </div>
 
             <label>Luck</label>
@@ -204,17 +348,11 @@
             <div class="link-note"><a href="https://www.unixtimestamp.com" target="_blank"
                     rel="noopener noreferrer">Check current timestamp</a></div>
 
-            <label>Footer Time</label>
-            <div style="display:flex; gap:10px;">
-                <input id="footerHour" type="number" placeholder="HH" oninput="updatePreview()" />
-                <input id="footerMinute" type="number" placeholder="MM" oninput="updatePreview()" />
-                <select id="footerAMPM" onchange="updatePreview()">
-                    <option>AM</option>
-                    <option>PM</option>
-                </select>
+            <div class="button-row">
+                <button onclick="generateJSON()">Generate JSON</button>
+                <button onclick="copyJSON()" class="copy-btn">Copy JSON</button>
             </div>
 
-            <button onclick="generateJSON()">Generate JSON</button>
             <div class="link-note"><a href="https://discohook.org/" target="_blank" rel="noopener noreferrer">Paste your
                     JSON code under the "JSON DATA EDITOR" tab</a></div>
 
@@ -264,8 +402,36 @@
                 .replace(/\n/g, "<br>");
         }
 
-        function formatNumber(x) { if (!x) return ""; x = x.replace(/,/g, ""); return Number(x).toLocaleString(); }
-        function formatLuck(x) { if (!x) return ""; x = x.replace(/,/g, ""); return Number(x).toLocaleString(undefined, { maximumFractionDigits: 3 }); }
+        function formatNumber(x) {
+            if (!x) return "";
+            x = String(x).replace(/,/g, "");
+            const n = Number(x);
+            if (Number.isNaN(n)) return x;
+            return n.toLocaleString('en-US');
+        }
+
+        function formatLuck(x) {
+            if (!x) return "";
+            x = String(x).replace(/,/g, "");
+            const n = Number(x);
+            if (Number.isNaN(n)) return x;
+            return n.toLocaleString('en-US', { maximumFractionDigits: 3 });
+        }
+
+        function getTimeFromTimestamp(timestamp) {
+            const ts = Number(timestamp);
+            if (!Number.isFinite(ts) || ts <= 0) return "";
+            const d = new Date(ts * 1000);
+            if (Number.isNaN(d.getTime())) return "";
+            let h = d.getHours();
+            const m = d.getMinutes();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12;
+            if (h === 0) h = 12;
+            const paddedH = String(h).padStart(2, '0');
+            const paddedM = String(m).padStart(2, '0');
+            return `${paddedH}:${paddedM} ${ampm}`;
+        }
 
         function updatePreview() {
             const topUsername = document.getElementById("topUsername").value;
@@ -276,10 +442,8 @@
             const luck = formatLuck(document.getElementById("luck").value);
             const timestamp = document.getElementById("timestamp").value;
             const stripe = document.getElementById("stripeColor").value || "#4d5efa";
-            const hour = document.getElementById('footerHour').value.padStart(2, '0');
-            const minute = document.getElementById('footerMinute').value.padStart(2, '0');
-            const ampm = document.getElementById('footerAMPM').value;
-            const footerTime = hour && minute ? `Today at ${hour}:${minute} ${ampm}` : "";
+            const timestampTime = getTimeFromTimestamp(timestamp);
+            const footerTime = timestampTime ? `Today at ${timestampTime}` : "";
 
             // Rarity + From Glitched for default
             let rarityText = "", glitchedText = "";
@@ -327,10 +491,8 @@
             const luck = formatLuck(document.getElementById("luck").value);
             const timestamp = document.getElementById("timestamp").value;
             const stripe = document.getElementById("stripeColor").value || "#4d5efa";
-            const hour = document.getElementById('footerHour').value.padStart(2, '0');
-            const minute = document.getElementById('footerMinute').value.padStart(2, '0');
-            const ampm = document.getElementById('footerAMPM').value;
-            const footerTime = hour && minute ? `Today at ${hour}:${minute} ${ampm}` : "";
+            const timestampTime = getTimeFromTimestamp(timestamp);
+            const footerTime = timestampTime ? `Today at ${timestampTime}` : "";
 
             // Rarity + From Glitched
             let rarityText = "", glitchedText = "";
@@ -358,6 +520,20 @@
             }
 
             document.getElementById("output").textContent = JSON.stringify({ content: null, embeds: [embed], attachments: [] }, null, 2);
+        }
+
+        function copyJSON() {
+            const output = document.getElementById("output").textContent;
+            if (!output) {
+                alert("No JSON to copy. Generate JSON first.");
+                return;
+            }
+            navigator.clipboard.writeText(output).then(() => {
+                alert("JSON copied to clipboard!");
+            }).catch((err) => {
+                console.error("Clipboard write failed", err);
+                alert("Copy failed; please copy manually.");
+            });
         }
 
         updateEmojiByStripe();
